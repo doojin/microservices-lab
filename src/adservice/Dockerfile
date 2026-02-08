@@ -1,0 +1,12 @@
+FROM gradle:9.3.1-jdk21 AS build
+WORKDIR /app
+COPY build.gradle settings.gradle gradlew .
+COPY gradle/ gradle/
+RUN ./gradlew downloadRepos --no-daemon
+COPY . .
+RUN ./gradlew installDist --no-daemon
+
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+COPY --from=build /app/build/install/hipstershop .
+CMD ["./bin/AdService"]
