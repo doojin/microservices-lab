@@ -8,5 +8,7 @@ RUN ./gradlew installDist --no-daemon
 
 FROM eclipse-temurin:21-jre
 WORKDIR /app
+RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
+USER appuser
 COPY --from=build /app/build/install/hipstershop .
 CMD ["./bin/AdService"]
