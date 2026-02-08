@@ -11,4 +11,5 @@ WORKDIR /app
 RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
 USER appuser
 COPY --from=build /app/build/install/hipstershop .
+EXPOSE 9555
 CMD ["./bin/AdService"]
