@@ -1,11 +1,11 @@
-FROM mcr.microsoft.com/dotnet/sdk:10.0.302-noble-amd64@sha256:3dae2f7699441af56216ff64d5c9b6dfce7cd7dc7f4f71d353d29662b10a384f AS build
+FROM mcr.microsoft.com/dotnet/sdk:10.0.302-noble@sha256:ed034a8bf0b24ded0cbbac07e17825d8e9ebfe21e308191d0f7421eaf5ad4664 AS build
 WORKDIR /app
 COPY ./src/cartservice.csproj ./src/
 RUN dotnet restore ./src/cartservice.csproj
 COPY . .
 RUN dotnet publish ./src/cartservice.csproj -c Release
 
-FROM mcr.microsoft.com/dotnet/aspnet:10.0.10-alpine3.24-amd64@sha256:3bfa376de6eb064273c4a222d9b54c84f6ba15e43e540215fdb933afcc120d68
+FROM mcr.microsoft.com/dotnet/aspnet:10.0.10-alpine3.24@sha256:eb7c0c9ef04479bfff191036f6b8959a7d6bac983bd7160c6b8b84b20d3ad0e7
 WORKDIR /app
 ARG GRPC_HEALTH_PROBE_VERSION=0.4.34
 ADD --checksum=sha256:3ddaf85583613c97693e9b8aaa251dac07e73e366e159a7ccadbcf553117fcef \
