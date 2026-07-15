@@ -8,7 +8,8 @@ RUN dotnet publish ./src/cartservice.csproj -c Release
 FROM mcr.microsoft.com/dotnet/aspnet:10.0
 WORKDIR /app
 ARG GRPC_HEALTH_PROBE_VERSION=0.4.34
-ADD https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/v${GRPC_HEALTH_PROBE_VERSION}/grpc_health_probe-linux-amd64 /usr/local/bin/grpc_health_probe
+ADD --checksum=sha256:3ddaf85583613c97693e9b8aaa251dac07e73e366e159a7ccadbcf553117fcef \
+    https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/v${GRPC_HEALTH_PROBE_VERSION}/grpc_health_probe-linux-amd64 /usr/local/bin/grpc_health_probe
 RUN groupadd --system appgroup && \
     useradd --system -g appgroup appuser && \
     chmod +x /usr/local/bin/grpc_health_probe
