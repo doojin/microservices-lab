@@ -1,7 +1,16 @@
 services:
   adservice:
+    platform: linux/amd64
     build: ./src/adservice
     environment:
       PORT: 9555
     ports:
       - "9555:9555"
+
+  cartservice:
+    platform: linux/amd64
+    build: ./src/cartservice
+    environment:
+      ASPNETCORE_HTTP_PORTS: 5000
+    ports:
+      - "5000:5000"
